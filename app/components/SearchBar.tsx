@@ -3,7 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Dropdown from "react-dropdown";
 
-const SearchBar = () => {
+export default function SearchBar() {
   const [formData, setFormData] = useState({
     searchValue: "",
     dropdownValue: "",
@@ -17,9 +17,11 @@ const SearchBar = () => {
     "Business",
   ];
 
-  const handleSearch = (e) => {
+  const handleSearch = (e: { preventDefault: Function }) => {
     e.preventDefault();
-    router.push(`/destinations`);
+    router.push(
+      `/destinations?points_balance=${formData.searchValue}&travel_class=${formData.dropdownValue}`
+    );
   };
 
   return (
@@ -63,6 +65,4 @@ const SearchBar = () => {
       </form>
     </div>
   );
-};
-
-export default SearchBar;
+}
