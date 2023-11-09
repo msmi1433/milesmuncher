@@ -19,9 +19,13 @@ export default function SearchBar() {
 
   const handleSearch = (e: { preventDefault: Function }) => {
     e.preventDefault();
-    router.push(
-      `/destinations?points_balance=${formData.searchValue}&travel_class=${formData.dropdownValue}`
-    );
+    if (formData.searchValue && formData.dropdownValue) {
+      router.push(
+        `/destinations?points_balance=${formData.searchValue}&travel_class=${formData.dropdownValue}`
+      );
+    } else if (formData.searchValue) {
+      router.push(`/destinations?points_balance=${formData.searchValue}`);
+    }
   };
 
   return (
@@ -33,6 +37,7 @@ export default function SearchBar() {
         <input
           type="text"
           className="flex content-center justify-center"
+          name="points_balance"
           onChange={(e) => {
             if (/^[0-9]*$/.test(e.target.value)) {
               setFormData((prevState) => ({
@@ -49,6 +54,7 @@ export default function SearchBar() {
           placeholder="Enter your points balance..."
         />
         <Dropdown
+          className="select"
           options={dropdownOptions}
           placeholder="Select a travel class (optional)"
           onChange={(e) => {
