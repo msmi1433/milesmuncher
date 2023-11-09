@@ -28,6 +28,8 @@ export default function SearchBar() {
     }
   };
 
+  console.log(formData);
+
   return (
     <div className="w-full">
       <form
@@ -37,7 +39,7 @@ export default function SearchBar() {
         <input
           type="text"
           className="flex content-center justify-center"
-          name="points_balance"
+          // name="points_balance"
           onChange={(e) => {
             if (/^[0-9]*$/.test(e.target.value)) {
               setFormData((prevState) => ({
