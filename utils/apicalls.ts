@@ -1,5 +1,5 @@
 export const getDestinations = async (
-  points_balance: string | null,
+  points_balance: number | null,
   travel_class: string | null,
   stateSetter: Function
 ) => {

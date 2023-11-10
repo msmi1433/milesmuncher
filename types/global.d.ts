@@ -1,5 +1,5 @@
 export interface Destination {
-  [index: string]: string;
+  [index: string]: number;
   id: number;
   city: string;
   country: string;
