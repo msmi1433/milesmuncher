@@ -28,8 +28,6 @@ export default function SearchBar() {
     }
   };
 
-  console.log(formData);
-
   return (
     <div className="w-full">
       <form
