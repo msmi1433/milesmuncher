@@ -2,6 +2,7 @@
 
 import { Destination } from "@/types/global";
 import { getDestinations } from "@/utils/apicalls";
+import { use } from "chai";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Dropdown from "react-dropdown";
@@ -15,7 +16,8 @@ export default function SearchResults() {
     queries.get("travel_class")
   );
   const [destinations, setDestinations] = useState<Destination[]>([]);
-
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [maxPages, setMaxPages] = useState<number>(0);
   const [searchInput, setSearchInput] = useState<string>("");
 
   const dropdownOptions = [
@@ -29,12 +31,19 @@ export default function SearchResults() {
     e.preventDefault();
     if (searchInput) {
       setPointsBalance(Number(searchInput));
+      setCurrentPage(1);
     }
   };
 
   useEffect(() => {
-    getDestinations(pointsBalance, travelClass, setDestinations);
-  }, [travelClass, pointsBalance]);
+    getDestinations(
+      pointsBalance,
+      travelClass,
+      currentPage,
+      setDestinations,
+      setMaxPages
+    );
+  }, [travelClass, pointsBalance, currentPage]);
 
   return (
     <section>
@@ -53,35 +62,62 @@ export default function SearchResults() {
       <div className="flex flex-col">
         <p>Update your search:</p>
         <div className="flex justify-between">
-          <form action="" onSubmit={handleSearch}>
-            <input
-              type="text"
+          <div className="flex justify-evenly gap-4">
+            <form onSubmit={handleSearch}>
+              <input
+                type="text"
+                onChange={(e) => {
+                  if (/^[0-9]*$/.test(e.target.value)) {
+                    setSearchInput(e.target.value);
+                  } else {
+                    setSearchInput("");
+                  }
+                }}
+              />
+              <button>Submit</button>
+            </form>
+            <Dropdown
+              className="select capitalize"
+              options={dropdownOptions}
+              placeholder={
+                travelClass ? travelClass : "Selecet a travel class..."
+              }
               onChange={(e) => {
-                if (/^[0-9]*$/.test(e.target.value)) {
-                  setSearchInput(e.target.value);
-                } else {
-                  setSearchInput("");
-                }
+                setTravelClass(
+                  e.value === "Premium Economy"
+                    ? "p_economy"
+                    : e.value.toLowerCase()
+                );
+                setCurrentPage(1);
               }}
             />
-            <button>Submit</button>
-          </form>
-          <Dropdown
-            className="select capitalize"
-            options={dropdownOptions}
-            placeholder={
-              travelClass ? travelClass : "Selecet a travel class..."
-            }
-            onChange={(e) => {
-              setTravelClass(
-                e.value === "Premium Economy"
-                  ? "p_economy"
-                  : e.value === "Any Class"
-                  ? ""
-                  : e.value.toLowerCase()
-              );
-            }}
-          />
+
+          </div>
+          <div>
+            <button
+              onClick={() => {
+                if (currentPage > 1) {
+                  setCurrentPage((currentPage) => currentPage - 1);
+                }
+              }}
+            >
+              Previous
+            </button>
+            <p>
+              Page {currentPage} of {maxPages}
+            </p>
+            <button
+              onClick={() => {
+                if (currentPage < maxPages) {
+                  setCurrentPage((currentPage) => currentPage + 1);
+                }
+              }}
+            >
+              Next
+            </button>
+          </div>
+
+           
         </div>
       </div>
       <ul className="w-full flex flex-wrap justify-center gap-6">
