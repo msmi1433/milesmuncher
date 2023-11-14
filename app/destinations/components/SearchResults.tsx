@@ -91,103 +91,114 @@ export default function SearchResults() {
                 setCurrentPage(1);
               }}
             />
-
           </div>
-          <div>
-            <button
-              onClick={() => {
-                if (currentPage > 1) {
-                  setCurrentPage((currentPage) => currentPage - 1);
-                }
-              }}
-            >
-              Previous
-            </button>
-            <p>
-              Page {currentPage} of {maxPages}
-            </p>
-            <button
-              onClick={() => {
-                if (currentPage < maxPages) {
-                  setCurrentPage((currentPage) => currentPage + 1);
-                }
-              }}
-            >
-              Next
-            </button>
-          </div>
-
-           
+          {destinations.length ? (
+            <div>
+              <button
+                onClick={() => {
+                  if (currentPage > 1) {
+                    setCurrentPage((currentPage) => currentPage - 1);
+                  }
+                }}
+              >
+                Previous
+              </button>
+              <p>
+                Page {currentPage} of {maxPages}
+              </p>
+              <button
+                onClick={() => {
+                  if (currentPage < maxPages) {
+                    setCurrentPage((currentPage) => currentPage + 1);
+                  }
+                }}
+              >
+                Next
+              </button>
+            </div>
+          ) : null}
         </div>
       </div>
-      <ul className="w-full flex flex-wrap justify-center gap-6">
-        {destinations.map((destination) => {
-          return (
-            <li
-              key={destination.id}
-              className="flex flex-col gap-1 items-center"
-            >
-              {travelClass ? (
-                destination[travelClass + "_op"] ? (
+      {destinations.length ? (
+        <ul className="w-full flex flex-wrap justify-center gap-6">
+          {destinations.map((destination) => {
+            return (
+              <li
+                key={destination.id}
+                className="flex flex-col gap-1 items-center"
+              >
+                {travelClass ? (
+                  destination[travelClass + "_op"] ? (
+                    <div className="flex flex-col items-center">
+                      <p>{destination.city}</p>
+                      <p>{destination.country}</p>
+                      <p>
+                        Off-peak:{" "}
+                        {destination[travelClass + "_op"].toLocaleString()}
+                      </p>
+                      {destination[travelClass + "_p"] ? (
+                        <p>
+                          Peak:{" "}
+                          {destination[travelClass + "_p"].toLocaleString()}
+                        </p>
+                      ) : null}
+                    </div>
+                  ) : null
+                ) : (
                   <div className="flex flex-col items-center">
                     <p>{destination.city}</p>
                     <p>{destination.country}</p>
-                    <p>
-                      Off-peak:{" "}
-                      {destination[travelClass + "_op"].toLocaleString()}
-                    </p>
-                    {destination[travelClass + "_p"] ? (
-                      <p>
-                        Peak: {destination[travelClass + "_p"].toLocaleString()}
-                      </p>
-                    ) : null}
+                    <div className="flex justify-evenly gap-2">
+                      {destination.economy_op ? (
+                        <div className="flex flex-col items-center">
+                          <p>Economy </p>
+                          <p>
+                            Off-peak: {destination.economy_op.toLocaleString()}
+                          </p>
+                          {destination.economy_p ? (
+                            <p>
+                              Peak: {destination.economy_p.toLocaleString()}
+                            </p>
+                          ) : null}
+                        </div>
+                      ) : null}
+                      {destination.p_economy_op ? (
+                        <div className="flex flex-col items-center">
+                          <p>Premium Economy</p>
+                          <p>
+                            Off-peak:{" "}
+                            {destination.p_economy_op.toLocaleString()}
+                          </p>
+                          {destination.p_economy_p ? (
+                            <p>
+                              Peak: {destination.economy_p.toLocaleString()}
+                            </p>
+                          ) : null}
+                        </div>
+                      ) : null}
+                      {destination.business_op ? (
+                        <div className="flex flex-col items-center">
+                          <p>Business</p>
+                          <p>
+                            Off-peak: {destination.business_op.toLocaleString()}
+                          </p>
+                          {destination.business_p ? (
+                            <p>
+                              Peak: {destination.business_p.toLocaleString()}
+                            </p>
+                          ) : null}
+                        </div>
+                      ) : null}
+                    </div>
                   </div>
-                ) : null
-              ) : (
-                <div className="flex flex-col items-center">
-                  <p>{destination.city}</p>
-                  <p>{destination.country}</p>
-                  <div className="flex justify-evenly gap-2">
-                    {destination.economy_op ? (
-                      <div className="flex flex-col items-center">
-                        <p>Economy </p>
-                        <p>
-                          Off-peak: {destination.economy_op.toLocaleString()}
-                        </p>
-                        {destination.economy_p ? (
-                          <p>Peak: {destination.economy_p.toLocaleString()}</p>
-                        ) : null}
-                      </div>
-                    ) : null}
-                    {destination.p_economy_op ? (
-                      <div className="flex flex-col items-center">
-                        <p>Premium Economy</p>
-                        <p>
-                          Off-peak: {destination.p_economy_op.toLocaleString()}
-                        </p>
-                        {destination.p_economy_p ? (
-                          <p>Peak: {destination.economy_p.toLocaleString()}</p>
-                        ) : null}
-                      </div>
-                    ) : null}
-                    {destination.business_op ? (
-                      <div className="flex flex-col items-center">
-                        <p>Business</p>
-                        <p>
-                          Off-peak: {destination.business_op.toLocaleString()}
-                        </p>
-                        {destination.business_p ? (
-                          <p>Peak: {destination.business_p.toLocaleString()}</p>
-                        ) : null}
-                      </div>
-                    ) : null}
-                  </div>
-                </div>
-              )}
-            </li>
-          );
-        })}
-      </ul>
+                )}
+              </li>
+            );
+          })}
+        </ul>
+      ) : (
+        <p>Sorry, no destinations found!</p>
+      )}
     </section>
   );
 }
