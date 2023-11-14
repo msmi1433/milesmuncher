@@ -76,6 +76,8 @@ export default function SearchResults() {
               setTravelClass(
                 e.value === "Premium Economy"
                   ? "p_economy"
+                  : e.value === "Any Class"
+                  ? ""
                   : e.value.toLowerCase()
               );
             }}
@@ -89,53 +91,61 @@ export default function SearchResults() {
               key={destination.id}
               className="flex flex-col gap-1 items-center"
             >
-              <p>{destination.city}</p>
-              <p>{destination.country}</p>
               {travelClass ? (
-                <div className="flex flex-col items-center">
-                  <p>
-                    Off-peak:{" "}
-                    {destination[travelClass + "_op"].toLocaleString()}
-                  </p>
-                  {destination[travelClass + "_p"] ? (
+                destination[travelClass + "_op"] ? (
+                  <div className="flex flex-col items-center">
+                    <p>{destination.city}</p>
+                    <p>{destination.country}</p>
                     <p>
-                      Peak: {destination[travelClass + "_p"].toLocaleString()}
+                      Off-peak:{" "}
+                      {destination[travelClass + "_op"].toLocaleString()}
                     </p>
-                  ) : null}
-                </div>
+                    {destination[travelClass + "_p"] ? (
+                      <p>
+                        Peak: {destination[travelClass + "_p"].toLocaleString()}
+                      </p>
+                    ) : null}
+                  </div>
+                ) : null
               ) : (
-                <div className="flex justify-evenly gap-2 text-center">
-                  {destination.economy_op ? (
-                    <div className="flex flex-col items-center">
-                      <p>Economy </p>
-                      <p>Off-peak: {destination.economy_op.toLocaleString()}</p>
-                      {destination.economy_p ? (
-                        <p>Peak: {destination.economy_p.toLocaleString()}</p>
-                      ) : null}
-                    </div>
-                  ) : null}
-                  {destination.p_economy_op ? (
-                    <div className="flex flex-col items-center">
-                      <p>Premium Economy</p>
-                      <p>
-                        Off-peak: {destination.p_economy_op.toLocaleString()}
-                      </p>
-                      {destination.p_economy_p ? (
-                        <p>Peak: {destination.economy_p.toLocaleString()}</p>
-                      ) : null}
-                    </div>
-                  ) : null}
-                  {destination.business_op ? (
-                    <div className="flex flex-col items-center">
-                      <p>Business</p>
-                      <p>
-                        Off-peak: {destination.business_op.toLocaleString()}
-                      </p>
-                      {destination.business_p ? (
-                        <p>Peak: {destination.business_p.toLocaleString()}</p>
-                      ) : null}
-                    </div>
-                  ) : null}
+                <div className="flex flex-col items-center">
+                  <p>{destination.city}</p>
+                  <p>{destination.country}</p>
+                  <div className="flex justify-evenly gap-2">
+                    {destination.economy_op ? (
+                      <div className="flex flex-col items-center">
+                        <p>Economy </p>
+                        <p>
+                          Off-peak: {destination.economy_op.toLocaleString()}
+                        </p>
+                        {destination.economy_p ? (
+                          <p>Peak: {destination.economy_p.toLocaleString()}</p>
+                        ) : null}
+                      </div>
+                    ) : null}
+                    {destination.p_economy_op ? (
+                      <div className="flex flex-col items-center">
+                        <p>Premium Economy</p>
+                        <p>
+                          Off-peak: {destination.p_economy_op.toLocaleString()}
+                        </p>
+                        {destination.p_economy_p ? (
+                          <p>Peak: {destination.economy_p.toLocaleString()}</p>
+                        ) : null}
+                      </div>
+                    ) : null}
+                    {destination.business_op ? (
+                      <div className="flex flex-col items-center">
+                        <p>Business</p>
+                        <p>
+                          Off-peak: {destination.business_op.toLocaleString()}
+                        </p>
+                        {destination.business_p ? (
+                          <p>Peak: {destination.business_p.toLocaleString()}</p>
+                        ) : null}
+                      </div>
+                    ) : null}
+                  </div>
                 </div>
               )}
             </li>

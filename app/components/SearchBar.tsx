@@ -63,6 +63,8 @@ export default function SearchBar() {
               dropdownValue:
                 e.value === "Premium Economy"
                   ? "p_economy"
+                  : e.value === "Any Class"
+                  ? ""
                   : e.value.toLowerCase(),
             }));
           }}
