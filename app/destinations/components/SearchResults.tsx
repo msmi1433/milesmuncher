@@ -2,7 +2,6 @@
 
 import { Destination } from "@/types/global";
 import { getDestinations } from "@/utils/apicalls";
-import { use } from "chai";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import Dropdown from "react-dropdown";
