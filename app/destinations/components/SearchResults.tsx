@@ -45,26 +45,28 @@ export default function SearchResults() {
   }, [travelClass, pointsBalance, currentPage]);
 
   return (
-    <section>
+    <section className="flex flex-col max-w-full pt-6 gap-2 items-center">
       {travelClass ? (
-        <h2 className="normal-nums">
+        <h2 className="text-center pb-6">
           {pointsBalance.toLocaleString()} air miles will take you to all of
           these destinations in{" "}
           {travelClass === "p_economy" ? "Premium Economy" : travelClass} ...
         </h2>
       ) : (
-        <h2>
+        <h2 className="text-center pb-6">
           {pointsBalance.toLocaleString()} air miles will take you to all of
           these destinations...
         </h2>
       )}
       <div className="flex flex-col">
         <p>Update your search:</p>
-        <div className="flex justify-between">
+        <div className="flex flex-col justify-between">
           <div className="flex justify-evenly gap-4">
             <form onSubmit={handleSearch}>
               <input
+                className="w-2/3"
                 type="text"
+                placeholder="Points"
                 onChange={(e) => {
                   if (/^[0-9]*$/.test(e.target.value)) {
                     setSearchInput(e.target.value);
@@ -78,13 +80,13 @@ export default function SearchResults() {
             <Dropdown
               className="select capitalize"
               options={dropdownOptions}
-              placeholder={
-                travelClass ? travelClass : "Selecet a travel class..."
-              }
+              placeholder={travelClass ? travelClass : "Travel class..."}
               onChange={(e) => {
                 setTravelClass(
                   e.value === "Premium Economy"
                     ? "p_economy"
+                    : e.value === "Any Class"
+                    ? ""
                     : e.value.toLowerCase()
                 );
                 setCurrentPage(1);
@@ -92,7 +94,7 @@ export default function SearchResults() {
             />
           </div>
           {destinations.length ? (
-            <div>
+            <div className="flex justify-center gap-2">
               <button
                 onClick={() => {
                   if (currentPage > 1) {
@@ -124,7 +126,7 @@ export default function SearchResults() {
             return (
               <li
                 key={destination.id}
-                className="flex flex-col gap-1 items-center"
+                className="w-full flex flex-col gap-1 items-center border-2 border-solid rounded p-2 "
               >
                 {travelClass ? (
                   destination[travelClass + "_op"] ? (
@@ -132,58 +134,55 @@ export default function SearchResults() {
                       <p>{destination.city}</p>
                       <p>{destination.country}</p>
                       <p>
-                        Off-peak:{" "}
-                        {destination[travelClass + "_op"].toLocaleString()}
+                        {destination[travelClass + "_op"].toLocaleString()}{" "}
+                        miles
                       </p>
                       {destination[travelClass + "_p"] ? (
                         <p>
-                          Peak:{" "}
-                          {destination[travelClass + "_p"].toLocaleString()}
+                          (Peak:{" "}
+                          {destination[travelClass + "_p"].toLocaleString()})
                         </p>
                       ) : null}
                     </div>
                   ) : null
                 ) : (
-                  <div className="flex flex-col items-center">
+                  <div className="flex flex-col items-center gap-1">
                     <p>{destination.city}</p>
                     <p>{destination.country}</p>
-                    <div className="flex justify-evenly gap-2">
+                    <div className="flex justify-evenly gap-3 text-sm">
                       {destination.economy_op ? (
-                        <div className="flex flex-col items-center">
-                          <p>Economy </p>
-                          <p>
-                            Off-peak: {destination.economy_op.toLocaleString()}
-                          </p>
+                        <div className="flex flex-col items-center text-center">
+                          <p>Economy</p>
+                          <p>{destination.economy_op.toLocaleString()} miles</p>
                           {destination.economy_p ? (
                             <p>
-                              Peak: {destination.economy_p.toLocaleString()}
+                              (Peak: {destination.economy_p.toLocaleString()})
                             </p>
                           ) : null}
                         </div>
                       ) : null}
                       {destination.p_economy_op ? (
-                        <div className="flex flex-col items-center">
-                          <p>Premium Economy</p>
+                        <div className="flex flex-col items-center text-center">
+                          <p>Premium</p>
                           <p>
-                            Off-peak:{" "}
-                            {destination.p_economy_op.toLocaleString()}
+                            {destination.p_economy_op.toLocaleString()} miles
                           </p>
                           {destination.p_economy_p ? (
                             <p>
-                              Peak: {destination.economy_p.toLocaleString()}
+                              (Peak: {destination.economy_p.toLocaleString()})
                             </p>
                           ) : null}
                         </div>
                       ) : null}
                       {destination.business_op ? (
-                        <div className="flex flex-col items-center">
+                        <div className="flex flex-col items-center text-center">
                           <p>Business</p>
                           <p>
-                            Off-peak: {destination.business_op.toLocaleString()}
+                            {destination.business_op.toLocaleString()} miles
                           </p>
                           {destination.business_p ? (
                             <p>
-                              Peak: {destination.business_p.toLocaleString()}
+                              (Peak: {destination.business_p.toLocaleString()})
                             </p>
                           ) : null}
                         </div>

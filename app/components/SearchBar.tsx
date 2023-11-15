@@ -29,9 +29,9 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="w-full">
+    <div className="min-w-full pt-6">
       <form
-        className="flex justify-between items-start"
+        className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-2"
         onSubmit={handleSearch}
       >
         <input
