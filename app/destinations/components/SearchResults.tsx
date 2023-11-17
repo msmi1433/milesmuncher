@@ -18,7 +18,6 @@ export default function SearchResults() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [maxPages, setMaxPages] = useState<number>(0);
-  const [searchInput, setSearchInput] = useState<string>("");
 
   useEffect(() => {
     getDestinations(
@@ -47,13 +46,12 @@ export default function SearchResults() {
       <AmendSearchResults
         setPointsBalance={setPointsBalance}
         setCurrentPage={setCurrentPage}
-        setSearchInput={setSearchInput}
         setTravelClass={setTravelClass}
-        searchInput={searchInput}
         travelClass={travelClass}
         destinationLength={destinations.length}
         currentPage={currentPage}
         maxPages={maxPages}
+        pointsBalance={pointsBalance}
       />
       <DestinationCard destinations={destinations} travelClass={travelClass} />
     </section>

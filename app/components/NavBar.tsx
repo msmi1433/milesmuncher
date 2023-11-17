@@ -1,7 +1,9 @@
+import Link from "next/link";
+
 export default function NavBar() {
   return (
     <div className="flex justify-between pb-6">
-      <h1>MilesMate</h1>
+      <Link href={"/"}>MilesMate</Link>
       <p>Account</p>
     </div>
   );

@@ -1,28 +1,30 @@
 import Dropdown from "react-dropdown";
+import { debounce } from "@/utils/utilityFunctions";
+import { useState } from "react";
 
 interface Props {
   setPointsBalance: Function;
   setCurrentPage: Function;
-  setSearchInput: Function;
   setTravelClass: Function;
-  searchInput: string;
   travelClass: string | null;
   destinationLength: number;
   currentPage: number;
   maxPages: number;
+  pointsBalance: number;
 }
 
 const AmendSearchResults = ({
   setPointsBalance,
   setCurrentPage,
-  setSearchInput,
   setTravelClass,
-  searchInput,
   travelClass,
   destinationLength,
   currentPage,
   maxPages,
+  pointsBalance,
 }: Props) => {
+  const [validInput, setValidInput] = useState<boolean>(true);
+
   const dropdownOptions = [
     "Any Class",
     "Economy",
@@ -30,12 +32,19 @@ const AmendSearchResults = ({
     "Business",
   ];
 
-  const handleSearch = (e: { preventDefault: Function }) => {
-    e.preventDefault();
-    if (searchInput) {
-      setPointsBalance(Number(searchInput));
-      setCurrentPage(1);
+  const handleInput = (value: string) => {
+    if (/^[0-9]*$/.test(value) && value !== "") {
+      setPointsBalance(Number(value));
+      setValidInput(true);
+    } else {
+      setValidInput(false);
     }
+  };
+
+  const debouncedHandleInput = debounce<string[]>(handleInput, 500);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    debouncedHandleInput(e.target.value);
   };
 
   return (
@@ -43,21 +52,12 @@ const AmendSearchResults = ({
       <p>Update your search:</p>
       <div className="flex flex-col justify-between">
         <div className="flex justify-evenly gap-4">
-          <form onSubmit={handleSearch}>
-            <input
-              className="w-2/3"
-              type="text"
-              placeholder="Points"
-              onChange={(e) => {
-                if (/^[0-9]*$/.test(e.target.value)) {
-                  setSearchInput(e.target.value);
-                } else {
-                  setSearchInput("");
-                }
-              }}
-            />
-            <button>Submit</button>
-          </form>
+          <input
+            className={`w-2/3 ${!validInput ? "border border-red-600" : null}`}
+            type="text"
+            placeholder={`${pointsBalance.toLocaleString()} miles`}
+            onChange={handleChange}
+          />
           <Dropdown
             className="select capitalize"
             options={dropdownOptions}

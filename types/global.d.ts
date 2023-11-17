@@ -10,3 +10,5 @@ export interface Destination {
   business_op: number;
   business_p: number;
 }
+
+export type DebouncedFunction<T extends any[]> = (...args: T) => void;
