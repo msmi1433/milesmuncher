@@ -8,7 +8,7 @@ export const debounce = <T extends any[]>(
   return (...args: T) => {
     clearTimeout(timer);
     timer = setTimeout(() => {
-      func.apply(this, args);
+      func(...args);
     }, timeout);
   };
 };
