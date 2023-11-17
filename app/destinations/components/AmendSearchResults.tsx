@@ -7,9 +7,6 @@ interface Props {
   setCurrentPage: Function;
   setTravelClass: Function;
   travelClass: string | null;
-  destinationLength: number;
-  currentPage: number;
-  maxPages: number;
   pointsBalance: number;
 }
 
@@ -18,9 +15,6 @@ const AmendSearchResults = ({
   setCurrentPage,
   setTravelClass,
   travelClass,
-  destinationLength,
-  currentPage,
-  maxPages,
   pointsBalance,
 }: Props) => {
   const [validInput, setValidInput] = useState<boolean>(true);
@@ -34,8 +28,9 @@ const AmendSearchResults = ({
 
   const handleInput = (value: string) => {
     if (/^[0-9]*$/.test(value) && value !== "") {
-      setPointsBalance(Number(value));
       setValidInput(true);
+      setPointsBalance(Number(value));
+      setCurrentPage(1);
     } else {
       setValidInput(false);
     }
@@ -74,31 +69,6 @@ const AmendSearchResults = ({
             }}
           />
         </div>
-        {destinationLength ? (
-          <div className="flex justify-center gap-2">
-            <button
-              onClick={() => {
-                if (currentPage > 1) {
-                  setCurrentPage((currentPage: number) => currentPage - 1);
-                }
-              }}
-            >
-              Previous
-            </button>
-            <p>
-              Page {currentPage} of {maxPages}
-            </p>
-            <button
-              onClick={() => {
-                if (currentPage < maxPages) {
-                  setCurrentPage((currentPage: number) => currentPage + 1);
-                }
-              }}
-            >
-              Next
-            </button>
-          </div>
-        ) : null}
       </div>
     </div>
   );

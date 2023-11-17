@@ -4,8 +4,10 @@ import { Destination } from "@/types/global";
 import { getDestinations } from "@/utils/apicalls";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import AmendSearchResults from "./AmendSearchResults";
 import DestinationCard from "./DestinationCard";
+import PageNavigation from "./PageNavigation";
 
 export default function SearchResults() {
   const queries: { get: Function } = useSearchParams();
@@ -31,6 +33,13 @@ export default function SearchResults() {
 
   return (
     <section className="flex flex-col max-w-full pt-6 gap-2 items-center">
+      <AmendSearchResults
+        setPointsBalance={setPointsBalance}
+        setCurrentPage={setCurrentPage}
+        setTravelClass={setTravelClass}
+        travelClass={travelClass}
+        pointsBalance={pointsBalance}
+      />
       {travelClass ? (
         <h2 className="text-center pb-6">
           {pointsBalance.toLocaleString()} air miles will take you to all of
@@ -43,17 +52,16 @@ export default function SearchResults() {
           these destinations...
         </h2>
       )}
-      <AmendSearchResults
-        setPointsBalance={setPointsBalance}
-        setCurrentPage={setCurrentPage}
-        setTravelClass={setTravelClass}
-        travelClass={travelClass}
+      <PageNavigation
         destinationLength={destinations.length}
         currentPage={currentPage}
         maxPages={maxPages}
-        pointsBalance={pointsBalance}
+        setCurrentPage={setCurrentPage}
       />
       <DestinationCard destinations={destinations} travelClass={travelClass} />
+      <Link href={"#top"}>
+        <button>Back to top</button>
+      </Link>
     </section>
   );
 }
