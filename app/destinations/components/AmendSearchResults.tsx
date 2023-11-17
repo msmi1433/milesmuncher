@@ -1,5 +1,3 @@
-"use client";
-
 import Dropdown from "react-dropdown";
 
 interface Props {
