@@ -4,7 +4,6 @@ import { Destination } from "@/types/global";
 import { getDestinations } from "@/utils/apicalls";
 import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
-import Link from "next/link";
 import AmendSearchResults from "./AmendSearchResults";
 import DestinationCard from "./DestinationCard";
 import PageNavigation from "./PageNavigation";
@@ -59,9 +58,6 @@ export default function SearchResults() {
         setCurrentPage={setCurrentPage}
       />
       <DestinationCard destinations={destinations} travelClass={travelClass} />
-      <Link href={"#top"}>
-        <button>Back to top</button>
-      </Link>
     </section>
   );
 }
