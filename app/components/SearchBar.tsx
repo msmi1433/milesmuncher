@@ -1,73 +1,61 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Dropdown from "react-dropdown";
+import Select from "react-select";
+import { DropdownOption } from "@/types/global";
 
 export default function SearchBar() {
-  const [formData, setFormData] = useState({
-    searchValue: "",
-    dropdownValue: "",
-  });
-  const router = useRouter();
-
-  const dropdownOptions = [
-    "Any Class",
-    "Economy",
-    "Premium Economy",
-    "Business",
+  const dropdownOptions: DropdownOption[] = [
+    { value: "", label: "Any Class" },
+    { value: "economy", label: "Economy" },
+    { value: "p_economy", label: "Premium Economy" },
+    { value: "business", label: "Business" },
   ];
+  const [dropdownValue, setDropdownValue] = useState<DropdownOption | null>(
+    null
+  );
+  const [pointsBalance, setPointsBalance] = useState<string>("");
+  const router = useRouter();
 
   const handleSearch = (e: { preventDefault: Function }) => {
     e.preventDefault();
-    if (formData.searchValue && formData.dropdownValue) {
+    if (pointsBalance && dropdownValue?.value) {
       router.push(
-        `/destinations?points_balance=${formData.searchValue}&travel_class=${formData.dropdownValue}`
+        `/destinations?points_balance=${pointsBalance}&travel_class=${dropdownValue?.value}`
       );
-    } else if (formData.searchValue) {
-      router.push(`/destinations?points_balance=${formData.searchValue}`);
+    } else if (pointsBalance) {
+      router.push(`/destinations?points_balance=${pointsBalance}`);
     }
   };
 
   return (
-    <div className="min-w-full pt-6">
+    <div className="min-w-full p-2 border border-borderCharcoal rounded text-sm">
       <form
-        className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-2"
+        className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-4"
         onSubmit={handleSearch}
       >
-        <input
-          type="text"
-          className="flex content-center justify-center"
-          onChange={(e) => {
-            if (/^[0-9]*$/.test(e.target.value)) {
-              setFormData((prevState) => ({
-                ...prevState,
-                searchValue: e.target.value,
-              }));
-            } else {
-              setFormData((prevState) => ({
-                ...prevState,
-                searchValue: "",
-              }));
-            }
-          }}
-          placeholder="Enter your points balance..."
-        />
-        <Dropdown
-          className="select"
-          options={dropdownOptions}
-          placeholder="Select a travel class (optional)"
-          onChange={(e) => {
-            setFormData((prevState) => ({
-              ...prevState,
-              dropdownValue:
-                e.value === "Premium Economy"
-                  ? "p_economy"
-                  : e.value === "Any Class"
-                  ? ""
-                  : e.value.toLowerCase(),
-            }));
-          }}
-        />
+        <div className="w-full flex justify-between items-center">
+          <input
+            type="text"
+            className="rounded p-2"
+            onChange={(e) => {
+              if (/^[0-9]*$/.test(e.target.value)) {
+                setPointsBalance(e.target.value);
+              } else {
+                setPointsBalance("");
+              }
+            }}
+            placeholder="Enter your points balance..."
+          />
+
+          <Select
+            className="select bg-white p-2 rounded"
+            defaultValue={dropdownValue}
+            options={dropdownOptions}
+            placeholder="Travel Class"
+            onChange={setDropdownValue}
+          />
+        </div>
         <button>Search</button>
       </form>
     </div>

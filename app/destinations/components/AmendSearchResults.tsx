@@ -1,6 +1,7 @@
-import Dropdown from "react-dropdown";
 import { debounce } from "@/utils/utilityFunctions";
 import { useState } from "react";
+import { DropdownOption } from "@/types/global";
+import Select from "react-select";
 
 interface Props {
   setPointsBalance: Function;
@@ -19,11 +20,11 @@ const AmendSearchResults = ({
 }: Props) => {
   const [validInput, setValidInput] = useState<boolean>(true);
 
-  const dropdownOptions = [
-    "Any Class",
-    "Economy",
-    "Premium Economy",
-    "Business",
+  const dropdownOptions: DropdownOption[] = [
+    { value: "", label: "Any Class" },
+    { value: "economy", label: "Economy" },
+    { value: "p_economy", label: "Premium Economy" },
+    { value: "business", label: "Business" },
   ];
 
   const handleInput = (value: string) => {
@@ -53,18 +54,12 @@ const AmendSearchResults = ({
             placeholder={`${pointsBalance.toLocaleString()} miles`}
             onChange={handleChange}
           />
-          <Dropdown
+          <Select
             className="select capitalize"
             options={dropdownOptions}
             placeholder={travelClass ? travelClass : "Travel class..."}
             onChange={(e) => {
-              setTravelClass(
-                e.value === "Premium Economy"
-                  ? "p_economy"
-                  : e.value === "Any Class"
-                  ? ""
-                  : e.value.toLowerCase()
-              );
+              setTravelClass(e?.value);
               setCurrentPage(1);
             }}
           />

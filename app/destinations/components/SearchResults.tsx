@@ -43,7 +43,7 @@ export default function SearchResults() {
         <h2 className="text-center pb-6">
           {pointsBalance.toLocaleString()} air miles will take you to all of
           these destinations in{" "}
-          {travelClass === "p_economy" ? "Premium Economy" : travelClass} ...
+          {travelClass === "p_economy" ? "premium economy" : travelClass} ...
         </h2>
       ) : (
         <h2 className="text-center pb-6">
