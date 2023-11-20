@@ -62,7 +62,7 @@ const AmendSearchResults = ({
                 ? travelClass === "p_economy"
                   ? "Premium Economy"
                   : travelClass
-                : "Travel class..."
+                : "Class"
             }
             onChange={(e) => {
               setTravelClass(e?.value);

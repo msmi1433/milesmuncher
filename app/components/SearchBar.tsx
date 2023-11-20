@@ -34,10 +34,10 @@ export default function SearchBar() {
         className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-4"
         onSubmit={handleSearch}
       >
-        <div className="w-full flex justify-between items-center">
+        <div className="w-full flex justify-between items-center gap-2">
           <input
             type="text"
-            className="rounded p-2"
+            className="rounded p-2 w-1/2 text-xs"
             onChange={(e) => {
               if (/^[0-9]*$/.test(e.target.value)) {
                 setPointsBalance(e.target.value);
@@ -45,14 +45,13 @@ export default function SearchBar() {
                 setPointsBalance("");
               }
             }}
-            placeholder="Enter your points balance..."
+            placeholder="Miles balance"
           />
-
           <Select
-            className="select bg-white p-2 rounded"
+            className="select bg-white w-1/2 rounded text-xs"
             defaultValue={dropdownValue}
             options={dropdownOptions}
-            placeholder="Travel Class"
+            placeholder="Class (optional)"
             onChange={setDropdownValue}
           />
         </div>
