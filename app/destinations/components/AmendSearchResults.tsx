@@ -57,7 +57,13 @@ const AmendSearchResults = ({
           <Select
             className="select capitalize"
             options={dropdownOptions}
-            placeholder={travelClass ? travelClass : "Travel class..."}
+            placeholder={
+              travelClass
+                ? travelClass === "p_economy"
+                  ? "Premium Economy"
+                  : travelClass
+                : "Travel class..."
+            }
             onChange={(e) => {
               setTravelClass(e?.value);
               setCurrentPage(1);
