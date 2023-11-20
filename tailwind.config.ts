@@ -14,6 +14,8 @@ const config: Config = {
       red: "#CE4760",
       white: "#FFFFFF",
       placeholder: "#9ca3af",
+      searchBorder: "#cccccc",
+      placeholderText: "#807f7f",
     },
   },
   plugins: [],

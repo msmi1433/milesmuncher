@@ -37,7 +37,7 @@ export default function SearchBar() {
         <div className="w-full flex justify-between items-center gap-2">
           <input
             type="text"
-            className="rounded p-2 w-1/2 text-xs"
+            className="rounded p-2.5 w-1/2 text-xs border border-searchBorder border-solid placeholder:text-placeholderText"
             onChange={(e) => {
               if (/^[0-9]*$/.test(e.target.value)) {
                 setPointsBalance(e.target.value);

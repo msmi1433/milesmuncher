@@ -47,15 +47,19 @@ const AmendSearchResults = ({
     <div className="flex flex-col">
       <p>Update your search:</p>
       <div className="flex flex-col justify-between">
-        <div className="flex justify-evenly gap-4">
+        <div className="flex justify-evenly gap-2">
           <input
-            className={`w-2/3 ${!validInput ? "border border-red-600" : null}`}
+            className={`w-1/2 bg-white rounded p-1.5 placeholder:text-placeholderText ${
+              !validInput
+                ? "border border-red-600"
+                : "border border-searchBorder border-solid"
+            }`}
             type="text"
             placeholder={`${pointsBalance.toLocaleString()} miles`}
             onChange={handleChange}
           />
           <Select
-            className="select capitalize"
+            className="select capitalize w-1/2 rounded"
             options={dropdownOptions}
             placeholder={
               travelClass
