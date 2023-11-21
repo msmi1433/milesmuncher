@@ -55,7 +55,9 @@ export default function SearchBar() {
             onChange={setDropdownValue}
           />
         </div>
-        <button>Search</button>
+        <button className="bg-accentBlue hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
+          Search
+        </button>
       </form>
     </div>
   );

@@ -12,20 +12,26 @@ const PageNavigation = ({
   setCurrentPage,
 }: Props) => {
   return destinationLength ? (
-    <div className="flex justify-center gap-2">
+    <div className="flex justify-center items-center gap-2 text-sm">
       <button
+        className={`bg-accentBlue hover:bg-buttonHover text-white py-0.5 px-2 rounded-full ${
+          currentPage === 1 ? "invisible" : null
+        }`}
         onClick={() => {
           if (currentPage > 1) {
             setCurrentPage((currentPage: number) => currentPage - 1);
           }
         }}
       >
-        Previous
+        Prev
       </button>
-      <p>
+      <p className="w-24 text-center">
         Page {currentPage} of {maxPages}
       </p>
       <button
+        className={`bg-accentBlue hover:bg-buttonHover text-white py-0.5 px-2 rounded-full ${
+          currentPage === maxPages ? "invisible" : null
+        }`}
         onClick={() => {
           if (currentPage < maxPages) {
             setCurrentPage((currentPage: number) => currentPage + 1);

@@ -9,13 +9,14 @@ const config: Config = {
   theme: {
     colors: {
       bgWhite: "#f5f5f5",
-      borderCharcoal: "#364e59",
+      borderCharcoal: "#75838a",
       accentBlue: "#3185fc",
-      red: "#CE4760",
+      red: "#FF0000",
       white: "#FFFFFF",
       placeholder: "#9ca3af",
       searchBorder: "#cccccc",
       placeholderText: "#807f7f",
+      buttonHover: "#20549e",
     },
   },
   plugins: [],

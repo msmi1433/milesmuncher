@@ -3,40 +3,67 @@ import { Destination } from "@/types/global";
 interface Props {
   destinations: Destination[];
   travelClass: string | null;
+  isLoading: boolean;
 }
 
-const DestinationCard = ({ destinations, travelClass }: Props) => {
+const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
+  if (isLoading)
+    return (
+      <section className="h-screen p-6">
+        <p>Destinations loading...</p>
+      </section>
+    );
+
   return destinations.length ? (
     <ul className="w-full flex flex-wrap justify-center gap-6">
       {destinations.map((destination) => {
         return (
           <li
             key={destination.id}
-            className="w-full flex flex-col gap-1 items-center border-2 border-solid rounded p-2 "
+            className="w-full flex flex-col gap-1 items-center border-2 border-accentBlue rounded p-2 "
           >
             {travelClass ? (
               destination[travelClass + "_op"] ? (
-                <div className="flex flex-col items-center">
-                  <p>{destination.city}</p>
-                  <p>{destination.country}</p>
-                  <p>
-                    {destination[travelClass + "_op"].toLocaleString()} miles
-                  </p>
-                  {destination[travelClass + "_p"] ? (
+                <div className="flex flex-col items-center w-5/6 text-center">
+                  <div className="p-2">
                     <p>
-                      (Peak: {destination[travelClass + "_p"].toLocaleString()})
+                      <span className="font-semibold">{destination.city}</span>,{" "}
+                      {destination.country}
                     </p>
-                  ) : null}
+                    <p>British Airways</p>
+                  </div>
+                  <div className="text-center p-2 border-t border-borderCharcoal/50 w-full">
+                    <p>
+                      {destination[travelClass + "_op"].toLocaleString()} miles
+                    </p>
+                    {destination[travelClass + "_p"] ? (
+                      <p>
+                        (Peak:{" "}
+                        {destination[travelClass + "_p"].toLocaleString()})
+                      </p>
+                    ) : null}
+                  </div>
                 </div>
               ) : null
             ) : (
-              <div className="flex flex-col items-center gap-1">
-                <p>{destination.city}</p>
-                <p>{destination.country}</p>
-                <div className="flex justify-evenly gap-3 text-sm">
+              <div className="flex flex-col items-center gap-1 text-center">
+                <div className="p-2">
+                  <p>
+                    <span className="font-semibold">{destination.city}</span>,{" "}
+                    {destination.country}
+                  </p>
+                  <p>British Airways</p>
+                </div>
+                <div className="flex justify-evenly text-xs border-t w-full border-t-borderCharcoal/50">
                   {destination.economy_op ? (
-                    <div className="flex flex-col items-center text-center">
-                      <p>Economy</p>
+                    <div
+                      className={`flex flex-col items-center p-4 ${
+                        destination.p_economy_op || destination.business_op
+                          ? "border-r border-r-borderCharcoal/50"
+                          : null
+                      } h-full`}
+                    >
+                      <p className="font-semibold">Economy</p>
                       <p>{destination.economy_op.toLocaleString()} miles</p>
                       {destination.economy_p ? (
                         <p>(Peak: {destination.economy_p.toLocaleString()})</p>
@@ -44,8 +71,14 @@ const DestinationCard = ({ destinations, travelClass }: Props) => {
                     </div>
                   ) : null}
                   {destination.p_economy_op ? (
-                    <div className="flex flex-col items-center text-center">
-                      <p>Premium</p>
+                    <div
+                      className={`flex flex-col items-center p-4 ${
+                        destination.business_op
+                          ? "border-r border-r-borderCharcoal/50"
+                          : null
+                      } h-full`}
+                    >
+                      <p className="font-semibold">Premium</p>
                       <p>{destination.p_economy_op.toLocaleString()} miles</p>
                       {destination.p_economy_p ? (
                         <p>(Peak: {destination.economy_p.toLocaleString()})</p>
@@ -53,8 +86,8 @@ const DestinationCard = ({ destinations, travelClass }: Props) => {
                     </div>
                   ) : null}
                   {destination.business_op ? (
-                    <div className="flex flex-col items-center text-center">
-                      <p>Business</p>
+                    <div className="flex flex-col items-center p-4 h-full">
+                      <p className="font-semibold">Business</p>
                       <p>{destination.business_op.toLocaleString()} miles</p>
                       {destination.business_p ? (
                         <p>(Peak: {destination.business_p.toLocaleString()})</p>
