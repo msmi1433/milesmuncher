@@ -36,8 +36,8 @@ export default function SearchResults() {
   }, [travelClass, pointsBalance, currentPage]);
 
   return (
-    <main className="flex flex-col max-w-full gap-3 items-center">
-      <section className="bg-accentBlue rounded-lg flex flex-col gap-2 shadow-lg">
+    <main className="flex flex-col min-w-full gap-3 items-center">
+      <section className="w-full bg-accentBlue rounded-lg flex flex-col gap-2 shadow-lg">
         <AmendSearchResults
           setPointsBalance={setPointsBalance}
           setCurrentPage={setCurrentPage}
