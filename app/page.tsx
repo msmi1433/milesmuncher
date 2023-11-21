@@ -7,13 +7,15 @@ export default function Home() {
   return (
     <>
       <main className="h-full flex flex-col items-center gap-5">
-        <section className="flex flex-col items-center bg-white rounded-lg text-center shadow-sm">
-          <Image
-            src={heroImage}
-            alt="cartoon of passengers waiting to board a flight"
-            className="rounded-b-2xl rounded-t-lg shadow-md"
-          />
-          <div className="p-4 flex flex-col items-center gap-2">
+        <section className="flex flex-col items-center bg-accentBlue rounded-lg text-center shadow-sm">
+          <div className="bg-white rounded-t-lg">
+            <Image
+              src={heroImage}
+              alt="cartoon of passengers waiting to board a flight"
+              className="rounded-t-lg"
+            />
+          </div>
+          <div className="px-4 py-3 flex flex-col items-center gap-2 bg-white">
             <h1 className="text-xl">
               Where can your miles take{" "}
               <span className=" text-accentBlue">you?</span>
@@ -22,10 +24,8 @@ export default function Home() {
               Unlock the potential of your air miles and points with MilesMate
             </h3>
           </div>
-        </section>
-        <section className="flex flex-col items-center gap-4 border-borderCharcoal bg-accentBlue rounded-lg shadow-lg">
           <SearchBar />
-          <p className="text-center text-lg text-white px-4 pb-4">
+          <p className="text-center text-lg text-white px-4 py-3">
             Enter your points balance in the search bar above to find out where
             you can fly to with your air miles.
           </p>

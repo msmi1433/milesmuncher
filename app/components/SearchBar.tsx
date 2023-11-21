@@ -30,7 +30,7 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="min-w-full p-2 bg-white rounded-b-[3rem] text-sm shadow-xl rounded-t-lg">
+    <div className="min-w-full p-2 bg-white rounded-b-[3rem] text-sm shadow-xl">
       <form
         className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-1"
         onSubmit={handleSearch}
@@ -63,7 +63,7 @@ export default function SearchBar() {
           />
         </div>
         <p
-          className={`text-xs w-full ml-1 py-0.5 ${
+          className={`text-xs py-0.5 ${
             !validInput ? "text-red" : "text-borderCharcoal"
           }`}
         >
