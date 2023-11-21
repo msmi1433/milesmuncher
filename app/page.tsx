@@ -15,7 +15,7 @@ export default function Home() {
               className="rounded-t-lg"
             />
           </div>
-          <div className="px-4 py-3 flex flex-col items-center gap-2 bg-white">
+          <div className="w-full px-4 py-3 flex flex-col items-center gap-2 bg-white">
             <h1 className="text-xl">
               Where can your miles take{" "}
               <span className=" text-accentBlue">you?</span>
