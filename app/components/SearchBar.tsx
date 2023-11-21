@@ -1,74 +1,77 @@
 "use client";
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import Dropdown from "react-dropdown";
+import Select from "react-select";
+import { DropdownOption } from "@/types/global";
 
 export default function SearchBar() {
-  const [formData, setFormData] = useState({
-    searchValue: "",
-    dropdownValue: "",
-  });
-  const router = useRouter();
-
-  const dropdownOptions = [
-    "Any Class",
-    "Economy",
-    "Premium Economy",
-    "Business",
+  const dropdownOptions: DropdownOption[] = [
+    { value: "", label: "Any Class" },
+    { value: "economy", label: "Economy" },
+    { value: "p_economy", label: "Premium Economy" },
+    { value: "business", label: "Business" },
   ];
+  const [dropdownValue, setDropdownValue] = useState<DropdownOption | null>(
+    null
+  );
+  const [pointsBalance, setPointsBalance] = useState<string>("");
+  const [validInput, setValidInput] = useState<boolean>(true);
+  const router = useRouter();
 
   const handleSearch = (e: { preventDefault: Function }) => {
     e.preventDefault();
-    if (formData.searchValue && formData.dropdownValue) {
+    if (pointsBalance && dropdownValue?.value) {
       router.push(
-        `/destinations?points_balance=${formData.searchValue}&travel_class=${formData.dropdownValue}`
+        `/destinations?points_balance=${pointsBalance}&travel_class=${dropdownValue?.value}`
       );
-    } else if (formData.searchValue) {
-      router.push(`/destinations?points_balance=${formData.searchValue}`);
+    } else if (pointsBalance) {
+      router.push(`/destinations?points_balance=${pointsBalance}`);
     }
   };
 
   return (
-    <div className="min-w-full pt-6">
+    <div className="min-w-full p-2 bg-white rounded-b-[3rem] text-sm shadow-xl rounded-t-lg">
       <form
-        className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-2"
+        className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-1"
         onSubmit={handleSearch}
       >
-        <input
-          type="text"
-          className="flex content-center justify-center"
-          onChange={(e) => {
-            if (/^[0-9]*$/.test(e.target.value)) {
-              setFormData((prevState) => ({
-                ...prevState,
-                searchValue: e.target.value,
-              }));
-            } else {
-              setFormData((prevState) => ({
-                ...prevState,
-                searchValue: "",
-              }));
-            }
-          }}
-          placeholder="Enter your points balance..."
-        />
-        <Dropdown
-          className="select"
-          options={dropdownOptions}
-          placeholder="Select a travel class (optional)"
-          onChange={(e) => {
-            setFormData((prevState) => ({
-              ...prevState,
-              dropdownValue:
-                e.value === "Premium Economy"
-                  ? "p_economy"
-                  : e.value === "Any Class"
-                  ? ""
-                  : e.value.toLowerCase(),
-            }));
-          }}
-        />
-        <button>Search</button>
+        <div className="w-full flex justify-between items-center gap-2">
+          <input
+            type="text"
+            className={`rounded p-2.5 w-1/2 text-xs border border-solid placeholder:text-placeholderText ${
+              !validInput
+                ? "border border-red"
+                : "border border-searchBorder border-solid"
+            }`}
+            onChange={(e) => {
+              if (/^[0-9]*$/.test(e.target.value)) {
+                setPointsBalance(e.target.value);
+                setValidInput(true);
+              } else {
+                setPointsBalance("");
+                setValidInput(false);
+              }
+            }}
+            placeholder="Miles balance"
+          />
+          <Select
+            className="select bg-white w-1/2 rounded text-xs"
+            defaultValue={dropdownValue}
+            options={dropdownOptions}
+            placeholder="Class (optional)"
+            onChange={setDropdownValue}
+          />
+        </div>
+        <p
+          className={`text-xs w-full ml-1 py-0.5 ${
+            !validInput ? "text-red" : "text-borderCharcoal"
+          }`}
+        >
+          Please enter a whole number (no commas)
+        </p>
+        <button className="bg-accentBlue hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
+          Search
+        </button>
       </form>
     </div>
   );

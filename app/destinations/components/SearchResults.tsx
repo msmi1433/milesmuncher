@@ -6,6 +6,8 @@ import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import AmendSearchResults from "./AmendSearchResults";
 import DestinationCard from "./DestinationCard";
+import PageNavigation from "./PageNavigation";
+import Link from "next/link";
 
 export default function SearchResults() {
   const queries: { get: Function } = useSearchParams();
@@ -18,42 +20,68 @@ export default function SearchResults() {
   const [destinations, setDestinations] = useState<Destination[]>([]);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [maxPages, setMaxPages] = useState<number>(0);
+  const [isLoading, setIsLoading] = useState<boolean>(false);
 
   useEffect(() => {
+    setIsLoading(true);
     getDestinations(
       pointsBalance,
       travelClass,
       currentPage,
       setDestinations,
       setMaxPages
-    );
+    ).then(() => {
+      setIsLoading(false);
+    });
   }, [travelClass, pointsBalance, currentPage]);
 
   return (
-    <section className="flex flex-col max-w-full pt-6 gap-2 items-center">
-      {travelClass ? (
-        <h2 className="text-center pb-6">
-          {pointsBalance.toLocaleString()} air miles will take you to all of
-          these destinations in{" "}
-          {travelClass === "p_economy" ? "Premium Economy" : travelClass} ...
-        </h2>
-      ) : (
-        <h2 className="text-center pb-6">
-          {pointsBalance.toLocaleString()} air miles will take you to all of
-          these destinations...
-        </h2>
-      )}
-      <AmendSearchResults
-        setPointsBalance={setPointsBalance}
-        setCurrentPage={setCurrentPage}
-        setTravelClass={setTravelClass}
-        travelClass={travelClass}
-        destinationLength={destinations.length}
-        currentPage={currentPage}
-        maxPages={maxPages}
-        pointsBalance={pointsBalance}
-      />
-      <DestinationCard destinations={destinations} travelClass={travelClass} />
-    </section>
+    <main className="flex flex-col max-w-full gap-3 items-center">
+      <section className="bg-accentBlue rounded-lg flex flex-col gap-2 shadow-lg">
+        <AmendSearchResults
+          setPointsBalance={setPointsBalance}
+          setCurrentPage={setCurrentPage}
+          setTravelClass={setTravelClass}
+          travelClass={travelClass}
+          pointsBalance={pointsBalance}
+        />
+        {travelClass ? (
+          <h2 className="text-center text-xl px-4 pb-2 text-white">
+            <span className="font-semibold underline decoration-white">
+              {pointsBalance.toLocaleString()}
+            </span>{" "}
+            air miles can take you to all of these destinations in{" "}
+            <span className="font-semibold underline decoration-white">
+              {travelClass === "p_economy" ? "premium economy" : travelClass}...
+            </span>
+          </h2>
+        ) : (
+          <h2 className="text-center text-xl px-4 pb-2 text-white">
+            <span className="font-semibold underline decoration-white">
+              {pointsBalance.toLocaleString()}
+            </span>{" "}
+            air miles can take you to...
+          </h2>
+        )}
+      </section>
+      <section className="flex flex-col items-center gap-2">
+        <PageNavigation
+          destinationLength={destinations.length}
+          currentPage={currentPage}
+          maxPages={maxPages}
+          setCurrentPage={setCurrentPage}
+        />
+        <DestinationCard
+          destinations={destinations}
+          travelClass={travelClass}
+          isLoading={isLoading}
+        />
+      </section>
+      <Link href={"#top"}>
+        <button className="bg-accentBlue hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
+          Back to top
+        </button>
+      </Link>
+    </main>
   );
 }

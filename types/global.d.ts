@@ -12,3 +12,8 @@ export interface Destination {
 }
 
 export type DebouncedFunction<T extends any[]> = (...args: T) => void;
+
+interface DropdownOption {
+  value: string;
+  label: string;
+}
