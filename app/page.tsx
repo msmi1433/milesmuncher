@@ -13,6 +13,7 @@ export default function Home() {
               src={heroImage}
               alt="cartoon of passengers waiting to board a flight"
               className="rounded-t-lg"
+              priority
             />
           </div>
           <div className="w-full px-4 py-3 flex flex-col items-center gap-2 bg-white">
