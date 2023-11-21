@@ -23,14 +23,14 @@ export default function Home() {
             </h3>
           </div>
         </section>
-        <div className="flex flex-col items-center gap-4 border-borderCharcoal bg-accentBlue rounded-lg shadow-lg">
+        <section className="flex flex-col items-center gap-4 border-borderCharcoal bg-accentBlue rounded-lg shadow-lg">
           <SearchBar />
           <p className="text-center text-lg text-white px-4 pb-4">
             Enter your points balance in the search bar above to find out where
             you can fly to with your air miles.
           </p>
-        </div>
-        <div className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
+        </section>
+        <section className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
           <h3 className="font-semibold text-lg">Tips</h3>
           <p>
             <span className="font-semibold">
@@ -53,8 +53,8 @@ export default function Home() {
             </span>
             Support for other airlines is coming soon (see below).
           </p>
-        </div>
-        <div className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
+        </section>
+        <section className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
           <h3 className="font-semibold text-lg">Coming soon</h3>
           <ul className="space-y-2">
             <li>
@@ -68,8 +68,12 @@ export default function Home() {
               progress towards your dream trips by setting{" "}
               <span className="font-semibold">reward goals</span>.
             </li>
+            <li>
+              <span className="font-semibold">Knowledge hub</span> - use our
+              chatbot to find out the best ways to redeem your air miles.
+            </li>
           </ul>
-        </div>
+        </section>
         <p className="text-xs py-4 self-start">
           Hero image credit:{" "}
           <a href="https://www.vecteezy.com/free-vector/airport">

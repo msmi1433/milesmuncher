@@ -45,9 +45,11 @@ const AmendSearchResults = ({
 
   return (
     <>
-      <div className="flex flex-col p-2 border border-borderCharcoal rounded w-full">
-        <div className="flex flex-col justify-between">
-          <p className="text-sm pb-0.5">Update your search:</p>
+      <div className="flex flex-col p-2 bg-white shadow-sm rounded-b-[1.2rem] rounded-t-lg w-full">
+        <div className="flex flex-col justify-between gap-1">
+          <p className="text-sm pb-0.5 text-borderCharcoal">
+            Update your search:
+          </p>
           <div className="flex justify-evenly gap-2">
             <input
               className={`w-1/2 bg-white rounded p-1.5 placeholder:text-placeholderText ${
@@ -76,11 +78,11 @@ const AmendSearchResults = ({
             />
           </div>
           <p
-            className={`text-xs text-red w-full pt-0.5 ${
-              !validInput ? "opacity-100" : "opacity-0"
+            className={`text-xs w-full pt-0.5 ${
+              !validInput ? "text-red" : "text-borderCharcoal"
             }`}
           >
-            Invalid input - please enter a whole number (no commas)
+            Please enter a whole number (no commas)
           </p>
         </div>
       </div>

@@ -20,7 +20,7 @@ const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
         return (
           <li
             key={destination.id}
-            className="w-full flex flex-col gap-1 items-center border-2 border-accentBlue rounded p-2 "
+            className="w-full flex flex-col gap-1 items-center border bg-white border-accentBlue/50 rounded p-2 shadow-md"
           >
             {travelClass ? (
               destination[travelClass + "_op"] ? (
