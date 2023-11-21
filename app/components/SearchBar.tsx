@@ -15,6 +15,7 @@ export default function SearchBar() {
     null
   );
   const [pointsBalance, setPointsBalance] = useState<string>("");
+  const [validInput, setValidInput] = useState<boolean>(true);
   const router = useRouter();
 
   const handleSearch = (e: { preventDefault: Function }) => {
@@ -29,20 +30,26 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="min-w-full p-2 border border-borderCharcoal rounded text-sm">
+    <div className="min-w-full p-2 bg-white rounded-b-[3rem] text-sm shadow-xl rounded-t-lg">
       <form
-        className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-4"
+        className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-1"
         onSubmit={handleSearch}
       >
         <div className="w-full flex justify-between items-center gap-2">
           <input
             type="text"
-            className="rounded p-2.5 w-1/2 text-xs border border-searchBorder border-solid placeholder:text-placeholderText"
+            className={`rounded p-2.5 w-1/2 text-xs border border-solid placeholder:text-placeholderText ${
+              !validInput
+                ? "border border-red"
+                : "border border-searchBorder border-solid"
+            }`}
             onChange={(e) => {
               if (/^[0-9]*$/.test(e.target.value)) {
                 setPointsBalance(e.target.value);
+                setValidInput(true);
               } else {
                 setPointsBalance("");
+                setValidInput(false);
               }
             }}
             placeholder="Miles balance"
@@ -55,6 +62,13 @@ export default function SearchBar() {
             onChange={setDropdownValue}
           />
         </div>
+        <p
+          className={`text-xs w-full ml-1 py-0.5 ${
+            !validInput ? "text-red" : "text-borderCharcoal"
+          }`}
+        >
+          Please enter a whole number (no commas)
+        </p>
         <button className="bg-accentBlue hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
           Search
         </button>
