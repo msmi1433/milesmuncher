@@ -9,6 +9,7 @@ interface Props {
   setTravelClass: Function;
   travelClass: string | null;
   pointsBalance: number;
+  isError: boolean;
 }
 
 const AmendSearchResults = ({
@@ -17,6 +18,7 @@ const AmendSearchResults = ({
   setTravelClass,
   travelClass,
   pointsBalance,
+  isError,
 }: Props) => {
   const [validInput, setValidInput] = useState<boolean>(true);
 
@@ -32,6 +34,8 @@ const AmendSearchResults = ({
       setValidInput(true);
       setPointsBalance(Number(value));
       setCurrentPage(1);
+      if (!["economy", "p_economy", "business"].includes(travelClass!))
+        setTravelClass("");
     } else {
       setValidInput(false);
     }
@@ -57,7 +61,11 @@ const AmendSearchResults = ({
                 : "border border-searchBorder border-solid"
             }`}
             type="text"
-            placeholder={`${pointsBalance.toLocaleString()} miles`}
+            placeholder={
+              isError
+                ? "Miles Balance"
+                : pointsBalance.toLocaleString() + " miles"
+            }
             onChange={handleChange}
           />
           <Select
@@ -65,7 +73,7 @@ const AmendSearchResults = ({
             options={dropdownOptions}
             instanceId={"destinations"}
             placeholder={
-              travelClass
+              ["economy", "p_economy", "business"].includes(travelClass!)
                 ? travelClass === "p_economy"
                   ? "Premium Economy"
                   : travelClass

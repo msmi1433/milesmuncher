@@ -26,7 +26,7 @@ export default function Home() {
           </div>
           <SearchBar />
           <p className="text-center text-lg text-white px-4 py-3">
-            Enter your points balance in the search bar above to find out where
+            Enter your miles balance in the search bar above to find out where
             you can fly to with your air miles.
           </p>
         </section>

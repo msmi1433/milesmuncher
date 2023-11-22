@@ -52,7 +52,7 @@ export default function SearchBar() {
                 setValidInput(false);
               }
             }}
-            placeholder="Miles balance"
+            placeholder="Miles (e.g. 45000)"
           />
           <Select
             className="select bg-white w-1/2 rounded text-xs text-left"
