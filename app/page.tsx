@@ -1,6 +1,5 @@
 import SearchBar from "./components/SearchBar";
 import Image from "next/image";
-import placeholderImage from "../public/jk-placeholder-image.jpg";
 import heroImage from "../public/vecteezy_queue-in-airport-people-waiting-registration_13086260.jpg";
 
 export default function Home() {
@@ -31,51 +30,54 @@ export default function Home() {
             you can fly to with your air miles.
           </p>
         </section>
-        <section className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
-          <h3 className="font-semibold text-lg">Tips</h3>
-          <p>
-            <span className="font-semibold">
-              You can select a desired travel class in the search bar
-            </span>{" "}
-            to filter your results down to a specific class of travel.
-          </p>
-          <p>
-            Remember to{" "}
-            <span className="font-semibold">
-              include your points balance from partner programmes
-            </span>
-            , such as American Express, if applicable. These points can often be
-            transferred into your chosen airlines mileage scheme.
-          </p>
-          <p>
-            <span className="font-semibold">
-              Costs shown are for British Airways flights departing from London
-              airports.{" "}
-            </span>
-            Support for other airlines is coming soon (see below).
-          </p>
+        <section className="flex flex-col xl:flex-row gap-5 w-full">
+          <div className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
+            <h3 className="font-semibold text-lg">Tips</h3>
+            <p>
+              <span className="font-semibold">
+                You can select a desired travel class in the search bar
+              </span>{" "}
+              to filter your results down to a specific class of travel.
+            </p>
+            <p>
+              Remember to{" "}
+              <span className="font-semibold">
+                include your points balance from partner programmes
+              </span>
+              , such as American Express, if applicable. These points can often
+              be transferred into your chosen airlines mileage scheme.
+            </p>
+            <p>
+              <span className="font-semibold">
+                Costs shown are for British Airways flights departing from
+                London airports.{" "}
+              </span>
+              Support for other airlines is coming soon (see below).
+            </p>
+          </div>
+          <div className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
+            <h3 className="font-semibold text-lg">Coming soon</h3>
+            <ul className="space-y-2">
+              <li>
+                Support for{" "}
+                <span className="font-semibold">Virgin Atlantic</span> reward
+                flights.
+              </li>
+              <li>
+                <span className="font-semibold">Accounts</span> - aggregate your
+                miles balance across multiple airlines using{" "}
+                <span className="font-semibold">PointsPurse</span>, and track
+                your progress towards your dream trips by setting{" "}
+                <span className="font-semibold">reward goals</span>.
+              </li>
+              <li>
+                <span className="font-semibold">Knowledge hub</span> - use our
+                chatbot to find out the best ways to redeem your air miles.
+              </li>
+            </ul>
+          </div>
         </section>
-        <section className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
-          <h3 className="font-semibold text-lg">Coming soon</h3>
-          <ul className="space-y-2">
-            <li>
-              Support for <span className="font-semibold">Virgin Atlantic</span>{" "}
-              reward flights.
-            </li>
-            <li>
-              <span className="font-semibold">Accounts</span> - aggregate your
-              miles balance across multiple airlines using{" "}
-              <span className="font-semibold">PointsPurse</span>, and track your
-              progress towards your dream trips by setting{" "}
-              <span className="font-semibold">reward goals</span>.
-            </li>
-            <li>
-              <span className="font-semibold">Knowledge hub</span> - use our
-              chatbot to find out the best ways to redeem your air miles.
-            </li>
-          </ul>
-        </section>
-        <p className="text-xs py-4 self-start">
+        <p className="text-xs self-start">
           Hero image credit:{" "}
           <a href="https://www.vecteezy.com/free-vector/airport">
             Airport Vectors by Vecteezy

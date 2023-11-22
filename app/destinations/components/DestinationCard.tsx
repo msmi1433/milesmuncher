@@ -15,12 +15,12 @@ const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
     );
 
   return destinations.length ? (
-    <ul className="w-full flex flex-wrap justify-center gap-6">
+    <ul className="flex flex-wrap justify-center xl:justify-between gap-6 ">
       {destinations.map((destination) => {
         return (
           <li
             key={destination.id}
-            className="w-full flex flex-col gap-1 items-center border bg-white border-accentBlue/50 rounded p-2 shadow-md"
+            className="w-full lg:w-30% xl:w-32% flex flex-col gap-1 items-center border bg-white border-accentBlue/50 rounded p-2 shadow-md"
           >
             {travelClass ? (
               destination[travelClass + "_op"] ? (

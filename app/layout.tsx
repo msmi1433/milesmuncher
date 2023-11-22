@@ -20,7 +20,7 @@ export default function RootLayout({
     <html lang="en">
       <body id="top" className={`${inter.className} h-screen`}>
         <NavBar />
-        <main className="min-h-screen flex flex-col justify-center py-5 px-4 xl:p-16 bg-bgWhite">
+        <main className="min-h-screen flex flex-col justify-center py-5 px-4 xl:px-32 lg:px-32 bg-bgWhite">
           {children}
         </main>
       </body>
