@@ -10,6 +10,11 @@ const config: Config = {
     extend: {
       spacing: {
         "32%": "32%",
+        "30%": "30%",
+      },
+      screens: {
+        lg: "1000px",
+        xl: "1455px",
       },
     },
     colors: {

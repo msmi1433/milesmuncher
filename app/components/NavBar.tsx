@@ -4,7 +4,7 @@ import Image from "next/image";
 
 export default function NavBar() {
   return (
-    <div className="w-full top-0 flex justify-between pt-6 px-4 xl:px-32 bg-bgWhite">
+    <div className="w-full top-0 flex justify-between pt-6 px-4 lg:px-32 xl:px-32 bg-bgWhite">
       <Link href={"/"}>
         <Image src={Logo} alt="milesmate logo" height={"30"} />
       </Link>
