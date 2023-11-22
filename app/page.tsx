@@ -1,3 +1,5 @@
+"use-client";
+
 import SearchBar from "./components/SearchBar";
 import Image from "next/image";
 import heroImage from "../public/vecteezy_queue-in-airport-people-waiting-registration_13086260.jpg";
