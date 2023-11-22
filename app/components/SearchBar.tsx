@@ -37,6 +37,7 @@ export default function SearchBar() {
       >
         <div className="w-full flex justify-between items-center gap-2">
           <input
+            id="balance-input"
             type="text"
             className={`rounded p-2.5 w-1/2 text-xs border border-solid placeholder:text-placeholderText ${
               !validInput
@@ -55,6 +56,7 @@ export default function SearchBar() {
             placeholder="Miles (e.g. 45000)"
           />
           <Select
+            id="class-select"
             className="select bg-white w-1/2 rounded text-xs text-left"
             defaultValue={dropdownValue}
             options={dropdownOptions}

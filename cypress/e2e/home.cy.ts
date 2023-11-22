@@ -2,16 +2,18 @@ beforeEach(() => {
   cy.visit("/");
 });
 
-describe("homepage elements", () => {
+describe("homepage", () => {
   it("contains all relevant elements", () => {
+    cy.get("img").should("have.attr", "alt", "milesmate logo");
     cy.contains("MilesMate");
     cy.contains("Account");
     cy.contains("Search");
+    cy.contains("Tips");
+    cy.contains("Coming soon");
   });
   it("search flow works as expected", () => {
-    cy.get("input[name=points_balance]").type("123456");
-    cy.get("input[name=points_balance").should("have.value", "123456");
-    cy.get(".select").click();
+    cy.get("[id=balance-input]").type("123456");
+    cy.get("[id=class-select").click();
     cy.contains('[role="option"]', "Economy").click();
     cy.contains("Search").click();
     cy.url().should(
