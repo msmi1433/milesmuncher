@@ -46,7 +46,7 @@ const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
                 </div>
               ) : null
             ) : (
-              <div className="flex flex-col items-center gap-1 text-center">
+              <div className="flex flex-col items-center gap-1 text-center w-full">
                 <div className="p-2">
                   <p>
                     <span className="font-semibold">{destination.city}</span>,{" "}
@@ -57,7 +57,7 @@ const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
                 <div className="flex justify-evenly text-xs border-t w-full border-t-borderCharcoal/50">
                   {destination.economy_op ? (
                     <div
-                      className={`flex flex-col items-center p-4 ${
+                      className={`flex flex-col items-center py-4 px-2 w-full ${
                         destination.p_economy_op || destination.business_op
                           ? "border-r border-r-borderCharcoal/50"
                           : null
@@ -72,7 +72,7 @@ const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
                   ) : null}
                   {destination.p_economy_op ? (
                     <div
-                      className={`flex flex-col items-center p-4 ${
+                      className={`flex flex-col items-center py-4 px-2 w-full ${
                         destination.business_op
                           ? "border-r border-r-borderCharcoal/50"
                           : null
@@ -86,7 +86,7 @@ const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
                     </div>
                   ) : null}
                   {destination.business_op ? (
-                    <div className="flex flex-col items-center p-4 h-full">
+                    <div className="flex flex-col items-center py-4 px-2 w-full h-full">
                       <p className="font-semibold">Business</p>
                       <p>{destination.business_op.toLocaleString()} miles</p>
                       {destination.business_p ? (
@@ -102,7 +102,7 @@ const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
       })}
     </ul>
   ) : (
-    <p>Sorry, no destinations found!</p>
+    <p className="h-screen">Sorry, no destinations found!</p>
   );
 };
 
