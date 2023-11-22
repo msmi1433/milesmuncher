@@ -60,6 +60,7 @@ export default function SearchBar() {
             options={dropdownOptions}
             placeholder="Class (optional)"
             onChange={setDropdownValue}
+            instanceId={"home"}
           />
         </div>
         <div className="xl:flex xl:justify-between xl:w-full">
