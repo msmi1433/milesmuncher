@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Select from "react-select";
 import { DropdownOption } from "@/types/global";
+import { headers } from "next/headers";
 
 export default function SearchBar() {
   const dropdownOptions: DropdownOption[] = [
@@ -17,6 +18,7 @@ export default function SearchBar() {
   const [pointsBalance, setPointsBalance] = useState<string>("");
   const [validInput, setValidInput] = useState<boolean>(true);
   const router = useRouter();
+  const nonce = headers().get("x-nonce");
 
   const handleSearch = (e: { preventDefault: Function }) => {
     e.preventDefault();
@@ -34,6 +36,7 @@ export default function SearchBar() {
       <form
         className="flex flex-col justify-between xl:justify-evenly items-center xl:items-start gap-1"
         onSubmit={handleSearch}
+        nonce={nonce!}
       >
         <div className="w-full flex justify-between items-center gap-2">
           <input
