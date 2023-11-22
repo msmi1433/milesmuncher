@@ -30,9 +30,9 @@ export default function SearchBar() {
   };
 
   return (
-    <div className="min-w-full p-2 bg-white rounded-b-[3rem] text-sm shadow-xl">
+    <div className="min-w-full p-2 xl:py-2 xl:px-16 bg-white rounded-b-[3rem] text-sm shadow-xl">
       <form
-        className="flex flex-col xl:flex-row justify-between xl:justify-evenly items-center xl:items-start gap-1"
+        className="flex flex-col justify-between xl:justify-evenly items-center xl:items-start gap-1"
         onSubmit={handleSearch}
       >
         <div className="w-full flex justify-between items-center gap-2">
@@ -55,23 +55,25 @@ export default function SearchBar() {
             placeholder="Miles balance"
           />
           <Select
-            className="select bg-white w-1/2 rounded text-xs"
+            className="select bg-white w-1/2 rounded text-xs text-left"
             defaultValue={dropdownValue}
             options={dropdownOptions}
             placeholder="Class (optional)"
             onChange={setDropdownValue}
           />
         </div>
-        <p
-          className={`text-xs py-0.5 ${
-            !validInput ? "text-red" : "text-borderCharcoal"
-          }`}
-        >
-          Please enter a whole number (no commas)
-        </p>
-        <button className="bg-accentBlue hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
-          Search
-        </button>
+        <div className="xl:flex xl:justify-between xl:w-full">
+          <p
+            className={`text-xs pt-0.5 pb-2 ${
+              !validInput ? "text-red" : "text-borderCharcoal"
+            }`}
+          >
+            Please enter a whole number (no commas)
+          </p>
+          <button className="xl:my-1 xl:self-end bg-accentBlue hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
+            Search
+          </button>
+        </div>
       </form>
     </div>
   );

@@ -7,6 +7,11 @@ const config: Config = {
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
+    extend: {
+      spacing: {
+        "32%": "32%",
+      },
+    },
     colors: {
       bgWhite: "#f5f5f5",
       borderCharcoal: "#75838a",

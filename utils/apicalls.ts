@@ -5,7 +5,7 @@ export const getDestinations = async (
   destinationsSetter: Function,
   maxPageSetter: Function
 ) => {
-  let connectionStringDestinations = `https://airmiles-api.onrender.com/api/destinations?points_balance=${points_balance}&page=${currentPage}`;
+  let connectionStringDestinations = `https://airmiles-api.onrender.com/api/destinations?points_balance=${points_balance}&page=${currentPage}&limit=21`;
   let connectionStringMaxPages = `https://airmiles-api.onrender.com/api/destinations?points_balance=${points_balance}&limit=1000`;
   if (travel_class) {
     connectionStringDestinations += `&travel_class=${travel_class}`;
@@ -19,5 +19,5 @@ export const getDestinations = async (
   const maxPages = await resMaxPages.json();
 
   destinationsSetter(destinations);
-  maxPageSetter(Math.ceil(maxPages.destinations.length / 20));
+  maxPageSetter(Math.ceil(maxPages.destinations.length / 21));
 };

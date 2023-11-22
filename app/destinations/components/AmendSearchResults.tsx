@@ -44,7 +44,7 @@ const AmendSearchResults = ({
   };
 
   return (
-    <div className="w-full flex flex-col p-2 bg-white shadow-sm rounded-b-[1.2rem] rounded-t-lg">
+    <div className="w-full flex flex-col p-2 xl:px-6 bg-white shadow-sm rounded-b-[1.2rem] rounded-t-lg">
       <div className="flex flex-col justify-between gap-1">
         <p className="text-sm pb-0.5 text-borderCharcoal">
           Update your search:
