@@ -55,6 +55,7 @@ const AmendSearchResults = ({
         </p>
         <div className="flex justify-evenly gap-2">
           <input
+            id="balance-input"
             className={`text-xs w-1/2 bg-white rounded p-1.5 placeholder:text-placeholderText ${
               !validInput
                 ? "border border-red"
@@ -69,6 +70,7 @@ const AmendSearchResults = ({
             onChange={handleChange}
           />
           <Select
+            id="class-select"
             className="text-xs select capitalize w-1/2 rounded"
             options={dropdownOptions}
             instanceId={"destinations"}
