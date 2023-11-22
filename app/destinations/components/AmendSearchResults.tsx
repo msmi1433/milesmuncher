@@ -55,7 +55,7 @@ const AmendSearchResults = ({
         </p>
         <div className="flex justify-evenly gap-2">
           <input
-            className={`w-1/2 bg-white rounded p-1.5 placeholder:text-placeholderText ${
+            className={`text-xs w-1/2 bg-white rounded p-1.5 placeholder:text-placeholderText ${
               !validInput
                 ? "border border-red"
                 : "border border-searchBorder border-solid"
@@ -69,7 +69,7 @@ const AmendSearchResults = ({
             onChange={handleChange}
           />
           <Select
-            className="select capitalize w-1/2 rounded"
+            className="text-xs select capitalize w-1/2 rounded"
             options={dropdownOptions}
             instanceId={"destinations"}
             placeholder={
@@ -77,7 +77,7 @@ const AmendSearchResults = ({
                 ? travelClass === "p_economy"
                   ? "Premium Economy"
                   : travelClass
-                : "Class"
+                : "Class (optional)"
             }
             onChange={(e) => {
               setTravelClass(e?.value);

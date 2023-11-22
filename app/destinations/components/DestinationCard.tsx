@@ -20,7 +20,7 @@ const DestinationCard = ({
       </section>
     );
 
-  return !isError ? (
+  return !isError && destinations.length ? (
     <ul className="flex flex-wrap justify-center xl:justify-between gap-6 ">
       {destinations.map((destination) => {
         return (
