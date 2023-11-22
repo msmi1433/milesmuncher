@@ -4,8 +4,8 @@ export function middleware(request: NextRequest) {
   const nonce = Buffer.from(crypto.randomUUID()).toString("base64");
   const cspHeader = `
     default-src 'self' https://airmiles-api.onrender.com/;
-    script-src 'self' 'unsafe-inline' 'unsafe-eval';
-    style-src 'self' 'unsafe-inline';
+    script-src 'self' 'nonce-${nonce}' 'unsafe-eval';
+    style-src 'self';
     img-src 'self' blob: data:;
     frame-src;
     font-src 'self';
