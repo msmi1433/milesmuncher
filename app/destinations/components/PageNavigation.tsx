@@ -1,6 +1,6 @@
 interface Props {
   setCurrentPage: Function;
-  destinationLength: number;
+  destinationLength: number | undefined;
   currentPage: number;
   maxPages: number;
 }

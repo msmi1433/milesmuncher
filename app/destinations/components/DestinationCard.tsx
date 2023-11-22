@@ -4,9 +4,15 @@ interface Props {
   destinations: Destination[];
   travelClass: string | null;
   isLoading: boolean;
+  isError: boolean;
 }
 
-const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
+const DestinationCard = ({
+  destinations,
+  travelClass,
+  isLoading,
+  isError,
+}: Props) => {
   if (isLoading)
     return (
       <section className="h-screen p-6">
@@ -14,7 +20,7 @@ const DestinationCard = ({ destinations, travelClass, isLoading }: Props) => {
       </section>
     );
 
-  return destinations.length ? (
+  return !isError && destinations.length ? (
     <ul className="flex flex-wrap justify-center xl:justify-between gap-6 ">
       {destinations.map((destination) => {
         return (

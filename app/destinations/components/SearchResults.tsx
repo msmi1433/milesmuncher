@@ -21,6 +21,7 @@ export default function SearchResults() {
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [maxPages, setMaxPages] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isError, setIsError] = useState<boolean>(false);
 
   useEffect(() => {
     setIsLoading(true);
@@ -30,9 +31,15 @@ export default function SearchResults() {
       currentPage,
       setDestinations,
       setMaxPages
-    ).then(() => {
-      setIsLoading(false);
-    });
+    )
+      .then(() => {
+        setIsError(false);
+        setIsLoading(false);
+      })
+      .catch(() => {
+        setIsError(true);
+        setIsLoading(false);
+      });
   }, [travelClass, pointsBalance, currentPage]);
 
   return (
@@ -44,29 +51,37 @@ export default function SearchResults() {
           setTravelClass={setTravelClass}
           travelClass={travelClass}
           pointsBalance={pointsBalance}
+          isError={isError}
         />
-        {travelClass ? (
-          <h2 className="text-center text-xl px-4 pb-2 text-white">
-            <span className="font-semibold underline decoration-white">
-              {pointsBalance.toLocaleString()}
-            </span>{" "}
-            air miles can take you to all of these destinations in{" "}
-            <span className="font-semibold underline decoration-white">
-              {travelClass === "p_economy" ? "premium economy" : travelClass}...
-            </span>
-          </h2>
+        {!isError || pointsBalance < 1 ? (
+          travelClass ? (
+            <h2 className="text-center text-xl px-4 pb-2 text-white">
+              <span className="font-semibold underline decoration-white">
+                {pointsBalance.toLocaleString()}
+              </span>{" "}
+              air miles can take you to all of these destinations in{" "}
+              <span className="font-semibold underline decoration-white">
+                {travelClass === "p_economy" ? "premium economy" : travelClass}
+                ...
+              </span>
+            </h2>
+          ) : (
+            <h2 className="text-center text-xl px-4 pb-2 text-white">
+              <span className="font-semibold underline decoration-white">
+                {pointsBalance.toLocaleString()}
+              </span>{" "}
+              air miles can take you to...
+            </h2>
+          )
         ) : (
           <h2 className="text-center text-xl px-4 pb-2 text-white">
-            <span className="font-semibold underline decoration-white">
-              {pointsBalance.toLocaleString()}
-            </span>{" "}
-            air miles can take you to...
+            Please enter a miles balance using the search bar above.
           </h2>
         )}
       </section>
       <section className="flex flex-col items-center gap-2">
         <PageNavigation
-          destinationLength={destinations.length}
+          destinationLength={destinations ? destinations.length : undefined}
           currentPage={currentPage}
           maxPages={maxPages}
           setCurrentPage={setCurrentPage}
@@ -75,6 +90,7 @@ export default function SearchResults() {
           destinations={destinations}
           travelClass={travelClass}
           isLoading={isLoading}
+          isError={isError}
         />
       </section>
       <Link href={"#top"}>
