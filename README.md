@@ -1,4 +1,4 @@
-## This project is a work in progress, currently at version 1.00.
+## This project is a work in progress, currently at version 1.00 (23/11/2023).
 
 # MilesMate
 
