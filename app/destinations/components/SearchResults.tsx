@@ -56,18 +56,18 @@ export default function SearchResults() {
         {!isError || pointsBalance < 1 ? (
           travelClass ? (
             <h2 className="text-center text-xl px-4 pb-2 text-white">
-              <span className="font-semibold underline decoration-white">
+              <span className="font-bold decoration-white">
                 {pointsBalance.toLocaleString()}
               </span>{" "}
               air miles can take you to all of these destinations in{" "}
-              <span className="font-semibold underline decoration-white">
+              <span className="font-bold decoration-white capitalize">
                 {travelClass === "p_economy" ? "premium economy" : travelClass}
                 ...
               </span>
             </h2>
           ) : (
             <h2 className="text-center text-xl px-4 pb-2 text-white">
-              <span className="font-semibold underline decoration-white">
+              <span className="font-bold decoration-white">
                 {pointsBalance.toLocaleString()}
               </span>{" "}
               air miles can take you to...

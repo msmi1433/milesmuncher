@@ -21,6 +21,7 @@ const AmendSearchResults = ({
   isError,
 }: Props) => {
   const [validInput, setValidInput] = useState<boolean>(true);
+  const [validNumLength, setValidNumLength] = useState<boolean>(true);
 
   const dropdownOptions: DropdownOption[] = [
     { value: "", label: "Any Class" },
@@ -30,14 +31,23 @@ const AmendSearchResults = ({
   ];
 
   const handleInput = (value: string) => {
-    if (/^[0-9]*$/.test(value) && value !== "") {
+    if (
+      /^[0-9]*$/.test(value) &&
+      value !== "" &&
+      parseFloat(value) <= 999999999
+    ) {
       setValidInput(true);
+      setValidNumLength(true);
       setPointsBalance(Number(value));
       setCurrentPage(1);
       if (!["economy", "p_economy", "business"].includes(travelClass!))
         setTravelClass("");
+    } else if (parseFloat(value) > 999999999) {
+      setValidInput(false);
+      setValidNumLength(false);
     } else {
       setValidInput(false);
+      setValidNumLength(true);
     }
   };
 
@@ -92,7 +102,10 @@ const AmendSearchResults = ({
             !validInput ? "text-red" : "text-borderCharcoal"
           }`}
         >
-          Please enter a whole number (no commas)
+          Please enter a whole number (no commas){" "}
+          <span className={!validNumLength ? "text-red" : "hidden"}>
+            - Number must be smaller than 999,999,999
+          </span>
         </p>
       </div>
     </div>
