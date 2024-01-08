@@ -16,6 +16,7 @@ export default function SearchBar() {
   );
   const [pointsBalance, setPointsBalance] = useState<string>("");
   const [validInput, setValidInput] = useState<boolean>(true);
+  const [validNumLength, setValidNumLength] = useState<boolean>(true);
   const router = useRouter();
 
   const handleSearch = (e: { preventDefault: Function }) => {
@@ -45,12 +46,21 @@ export default function SearchBar() {
                 : "border border-searchBorder border-solid"
             }`}
             onChange={(e) => {
-              if (/^[0-9]*$/.test(e.target.value)) {
+              if (
+                /^[0-9]*$/.test(e.target.value) &&
+                parseFloat(e.target.value) <= 999999999
+              ) {
                 setPointsBalance(e.target.value);
                 setValidInput(true);
+                setValidNumLength(true);
+              } else if (parseFloat(e.target.value) > 999999999) {
+                setPointsBalance("");
+                setValidInput(false);
+                setValidNumLength(false);
               } else {
                 setPointsBalance("");
                 setValidInput(false);
+                setValidNumLength(true);
               }
             }}
             placeholder="Miles (e.g. 45000)"
@@ -71,7 +81,10 @@ export default function SearchBar() {
               !validInput ? "text-red" : "text-borderCharcoal"
             }`}
           >
-            Please enter a whole number (no commas)
+            Please enter a whole number (no commas){" "}
+            <span className={!validNumLength ? "text-red" : "hidden"}>
+              - Number must be smaller than 999,999,999
+            </span>
           </p>
           <button className="xl:my-1 xl:self-end bg-accentBlue hover:bg-buttonHover text-white font-bold py-2 px-4 rounded">
             Search

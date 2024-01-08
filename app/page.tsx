@@ -54,7 +54,8 @@ export default function Home() {
                 Costs shown are for British Airways flights departing from
                 London airports.{" "}
               </span>
-              Support for other airlines is coming soon (see below).
+              Support for other airlines is coming soon (see 'Coming soon'
+              section).
             </p>
           </div>
           <div className="w-full flex flex-col bg-white rounded-lg shadow-sm text-sm gap-2 p-4">
